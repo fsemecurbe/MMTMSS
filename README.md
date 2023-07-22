@@ -3,5 +3,5 @@
 ## To do 
 
 - Corriger et mettre dans un package les fonctions analyses ;
-- Corriger le voronoi, faire une fonction propre, conserver les étapes intermédiaires
+- Corriger le voronoi, faire une fonction propre, conserver les étapes intermédiaires, proposer la rasterisation
 - Corriger et simplifier les coumpunds 
