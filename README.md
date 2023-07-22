@@ -3,5 +3,5 @@
 ## To do 
 
 - Corriger et mettre dans un package les fonctions analyses ;
-- Corriger le voronoi, faire une fonction propre
+- Corriger le voronoi, faire une fonction propre, conserver les étapes intermédiaires
 - Corriger et simplifier les coumpunds 
