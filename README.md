@@ -1,4 +1,8 @@
-# joint_multifractal
+# Multivariate Multifractals To Modelize Social Segregation
+
+
+
+
 
 ## To do 
 
