@@ -73,3 +73,6 @@ def multifractal_index(frac):
     P = P / np.sum(P)
     return((-np.sum(frac[:,:,0]*np.log2(frac[:,:,0])), -np.sum(frac[:,:,1]*np.log2(frac[:,:,1])) ,  -np.sum(P*np.log2(P)),-np.sum(frac[:,:,0]*np.log2(frac[:,:,1]/frac[:,:,0])) ))
 
+def dissimilarity_analyze(fractal, resolutions):
+    res = [dissimilarity_index(downsizing_sum(fractal, resolution)) for resolution in resolutions]
+    return(pd.DataFrame({'resolution' : resolutions, 'dindex' : res}))
