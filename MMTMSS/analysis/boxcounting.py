@@ -78,7 +78,7 @@ def dissimilarity_analyze(fractal, resolutions):
     return(pd.DataFrame({'resolution' : resolutions, 'dindex' : res}))
 
 def multifractal_analyze(fractal, resolutions):
-    entropies= [multifractal_index(downsizing_sum(cascade_simple, resi)) for resolution in resolutions]
+    entropies= [multifractal_index(downsizing_sum(cascade_simple, resolution)) for resolution in resolutions]
     entropies = pd.DataFrame(entropies, columns=['I_0', 'I_1', 'I_01', 'Dkl'])
     entropies['lresolution'] = np.log2(resolutions)
     entropies['resolution'] = resolutions
