@@ -13,41 +13,28 @@ def build_kernel(r):
     kernel = kernel / np.sum(kernel)
     return(kernel[kernel.sum(1)>0][:,kernel.sum(1)>0])
 
-
-distribution = sc.multivariate_lognormal_cascade(6,
-                                       sigma1=.7,
-                                       sigma2=.7,
-                                       corr=.5)
-
-ratio = distribution[:,:,0] / (distribution[:,:,0] + distribution[:,:,1]) * 100
-
-plt.imshow(ratio, vmin=0, vmax=100, cmap="RdYlBu_r")
-
-kernel=build_kernel(35)
-smoothdistribution = np.stack([signal.convolve(distribution[:,:,0],kernel,method='direct', mode='same'),
+def dissimilarity(distribution, radius):
+    
+    kernel = build_kernel(radius)
+    smoothdistribution = np.stack([signal.convolve(distribution[:,:,0],kernel,method='direct', mode='same'),
                                signal.convolve(distribution[:,:,1],kernel,method='direct', mode='same')], axis=-1)
 
+    wherenontnull = np.sum(distribution, axis=2)>0
 
-#calculer la somme 
-#faire la selection
-# faire le calcul
-
-
-ratio = smooth[:,:,0] / (smooth[:,:,0] + smooth[:,:,1]) * 100
+    distributionnonnull = distribution[wherenontnull,:]
+    smoothdistribution = smoothdistribution[wherenontnull,:]
 
 
+    P0local= smoothdistribution[:,0] / (smoothdistribution[:,0] + smoothdistribution[:,1])
+    P1local= smoothdistribution[:,1] / (smoothdistribution[:,0] + smoothdistribution[:,1])
 
+    Entropie_locale = np.nansum((- np.log2(P0local) * P0local - np.log2(P1local) * P1local) *  np.sum(distributionnonnull, axis=1)/ np.sum(distributionnonnull) )
 
-plt.imshow(ratio, vmin=0, vmax=100, cmap="RdYlBu_r")
-
-
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt 
-from matplotlib.colors import LogNorm
-
-import MMTMSS.models.simple_cascade as sc
-
+    P0 = np.sum(distributionnonnull[:,0])
+    P1 = np.sum(distributionnonnull[:,1])
+    
+    Entropie_globale = -np.log2(P0/(P0+P1))*P0/(P0+P1) - np.log2(P1/(P0+P1))*P1/(P0+P1)   
+    return((Entropie_globale - Entropie_locale) /Entropie_globale)
 
 
 
