@@ -36,6 +36,10 @@ def dissimilarity(distribution, radius):
     Entropie_globale = -np.log2(P0/(P0+P1))*P0/(P0+P1) - np.log2(P1/(P0+P1))*P1/(P0+P1)   
     return((Entropie_globale - Entropie_locale) /Entropie_globale)
 
+def dissimilarity_analyze(distribution, resolutions):
+    res = [dissimilarity(distribution, resolution) for resolution in resolutions]
+    return(pd.DataFrame({'resolution' : resolutions, 'dindex' : res}))
+
 
 
 
