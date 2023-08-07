@@ -17,8 +17,8 @@ def build_kernel(r):
 def dissimilarity(distribution, radius):
     
     kernel = build_kernel(radius)
-    smoothdistribution = np.stack([signal.convolve(distribution[:,:,0],kernel,method='direct', mode='same'),
-                               signal.convolve(distribution[:,:,1],kernel,method='direct', mode='same')], axis=-1)
+    smoothdistribution = np.stack([signal.convolve(distribution[:,:,0],kernel, mode='same'),
+                               signal.convolve(distribution[:,:,1],kernel, mode='same')], axis=-1)
 
     wherenontnull = np.sum(distribution, axis=2)>0
 
