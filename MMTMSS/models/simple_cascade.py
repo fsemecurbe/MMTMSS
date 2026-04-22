@@ -1,6 +1,4 @@
 import numpy as np
-rng = np.random.default_rng()
-
 
 def multivariate_cascade(p,q, n):
     """
@@ -21,6 +19,10 @@ def multivariate_cascade(p,q, n):
     An Numpy array (2**n,2**n, 2)
 
     """
+    
+    rng = np.random.default_rng()
+
+
     P = p.copy()
     Q = q.copy()
     for i in range(n):
@@ -31,6 +33,8 @@ def multivariate_cascade(p,q, n):
 
 
 def multivariate_lognormal_cascade(n, sigma1=1, sigma2=1, corr=0):    
+    
+    rng = np.random.default_rng()
     exp1 = -1/2 * sigma1**2
     exp2 = -1/2 * sigma2**2
     
